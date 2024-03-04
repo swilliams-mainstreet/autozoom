@@ -4,7 +4,7 @@ let analytics = require('./analytics');
 let isDisabled = false;
 
 let updateIcon = function(tabId) {
-  let iconFileName = isDisabled ? "icon-inactive-38.png" : "icon-active-38.png";
+  let iconFileName = isDisabled ? "resources/icon-inactive-38.png" : "resources/icon-active-38.png";
   chrome.browserAction.setIcon({ path: iconFileName, tabId: tabId });
 };
 

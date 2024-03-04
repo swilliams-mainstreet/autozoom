@@ -34,7 +34,7 @@ module.exports = {
         // Copy manifest.json from the project root to the build directory
         { from: 'manifest.json', to: 'manifest.json' },
         // Copy the entire resources directory to the build directory under 'resources'
-        { from: path.resolve(__dirname, 'resources'), to: 'resources' }
+        { from: 'resources', to: 'resources' }
       ]
     })    
   ]

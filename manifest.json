@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Auto Zoom",
-  "description": "This extension automatically zooms in a page with a small font for Chrome users.",
+  "name": "Zoom 200%",
+  "description": "This extension automatically zooms in to 200% for Chrome users.",
   "version": "1.0.0",
 
   "icons": {

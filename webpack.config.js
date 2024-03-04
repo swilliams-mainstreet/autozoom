@@ -1,7 +1,6 @@
-let path = require('path');
-let webpack = require('webpack');
-let pluginClean = require('clean-webpack-plugin');
-let pluginCopy = require('copy-webpack-plugin');
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -9,32 +8,34 @@ module.exports = {
     "chrome-background-script": "./src/chrome-background-script.js"
   },
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.resolve(__dirname, 'build'),
     filename: "[name].bundle.js"
   },
   module: {
-    preLoaders: [
-      {test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/}
-    ],
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015']
-        }
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [
-    new pluginClean(['dist', 'build'], {
-      root: __dirname,
-      verbose: true,
-      dry: false
-    }),
-    new pluginCopy([
-      { from: path.join(__dirname, 'resources'), to: path.join(__dirname, 'build') }
-    ])
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        // Copy manifest.json from the project root to the build directory
+        { from: 'manifest.json', to: 'manifest.json' },
+        // Copy the entire resources directory to the build directory under 'resources'
+        { from: path.resolve(__dirname, 'resources'), to: 'resources' }
+      ]
+    })    
   ]
 };

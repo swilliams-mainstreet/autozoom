@@ -17,7 +17,8 @@ module.exports = {
 
     if ( isZoomIn && isForLongerText && isLargerThanCurrentZoom) {
       maxKnownLength = predominantTextProperties.textLength;
-      return newZoom;
+      //return newZoom;
+      return 2;
     }
   }
 
